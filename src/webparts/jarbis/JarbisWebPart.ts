@@ -11,6 +11,11 @@ import * as strings from 'JarbisWebPartStrings';
 import { initializeIcons } from '@uifabric/icons';
 import { getIconClassName } from '@uifabric/styling';
 import { css } from '@uifabric/utilities';
+import { IPowerItem } from './IPowerItem';
+import { sp } from '@pnp/sp';
+import '@pnp/sp/webs';
+import '@pnp/sp/lists';
+import '@pnp/sp/items';
 
 initializeIcons();
 
@@ -22,14 +27,34 @@ export interface IJarbisWebPartProps {
   backgroundColor: string;
   foregroundIcon: string;
   backgroundIcon: string;
+  list: string;
 }
 
 export default class JarbisWebPart extends BaseClientSideWebPart<IJarbisWebPartProps> {
+
+  private _powers: IPowerItem[];
+
+  protected onInit(): Promise<void> {
+    return super.onInit().then(() => {
+      sp.setup({
+        spfxContext: this.context,
+        defaultCachingTimeoutSeconds: 300,
+      });
+    });
+  }
 
   public render(): void {
     const oldbuttons = this.domElement.getElementsByClassName(styles.generateButton);
     for (let b = 0; b < oldbuttons.length; b++) {
       oldbuttons[b].removeEventListener('click', this.onGenerateHero);
+    }
+
+    if(this.displayMode == DisplayMode.Edit && typeof this._powers == "undefined") {
+      this.context.statusRenderer.displayLoadingIndicator(this.domElement, 'options');
+      this.getPowers().catch((error) => console.error(error));
+      return;
+    } else {
+      this.context.statusRenderer.clearLoadingIndicator(this.domElement);
     }
 
     const hero = `
@@ -56,6 +81,11 @@ export default class JarbisWebPart extends BaseClientSideWebPart<IJarbisWebPartP
     for (let b = 0; b < buttons.length; b++) {
       buttons[b].addEventListener('click', this.onGenerateHero);
     }
+  }
+
+  private getPowers = async(): Promise<void> => {
+    this._powers = await sp.web.lists.getByTitle(this.properties.list).items.select('Title','Icon','Colors','Prefix','Main').usingCaching().get();
+    this.render();
   }
 
   public onGenerateHero = (event: MouseEvent): void => {
