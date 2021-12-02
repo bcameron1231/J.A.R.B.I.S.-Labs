@@ -89,7 +89,30 @@ export default class JarbisWebPart extends BaseClientSideWebPart<IJarbisWebPartP
   }
 
   public onGenerateHero = (event: MouseEvent): void => {
-    console.log('Generating!' + this.properties.primaryPower);
+    const power1: IPowerItem = this.getRandomItem(this._powers);
+    const power2: IPowerItem = this.getRandomItem(this._powers, power1);
+    this.properties.primaryPower = power1.Title;
+    this.properties.secondaryPower = power2.Title;
+    
+    this.properties.backgroundColor = this.getRandomItem([...power1.Colors, ...power2.Colors]);
+    this.properties.foregroundColor = this.getRandomItem([...power1.Colors, ...power2.Colors], this.properties.backgroundColor);
+    
+    this.properties.backgroundIcon = this.getRandomItem(['StarburstSolid','CircleShapeSolid','HeartFill','SquareShapeSolid','ShieldSolid']);
+    this.properties.foregroundIcon = this.getRandomItem([...power1.Icon, ...power2.Icon], this.properties.backgroundIcon);
+    
+    const prefix = this.getRandomItem([...power1.Prefix,...power2.Prefix]);
+    const main = this.getRandomItem([...power1.Main, ...power2.Main], prefix);
+    this.properties.name = prefix + ' ' + main;
+    
+    this.render();
+  }
+
+  private getRandomItem = (items:any[], exclusion?:any): any => {
+    const choices = items.filter((value) => value !== exclusion);
+    if(choices.length) {
+      return choices[Math.floor(Math.random() * choices.length)];
+    }
+    return "";
   }
 
   protected get dataVersion(): Version {
