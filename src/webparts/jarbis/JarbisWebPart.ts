@@ -17,8 +17,16 @@ export default class JarbisWebPart extends BaseClientSideWebPart<IJarbisWebPartP
 
   public render(): void {
     this.domElement.innerHTML = `
-      <div class="${ styles.jarbis }">
-        Wowee!!
+      <div class="${styles.jarbis}">
+        <div class="${styles.logo}">
+          Logo
+        </div>
+        <div class="${styles.name}">
+          The Something Hero
+        </div>
+        <div class="${styles.powers}">
+          (Primary + Secondary)
+        </div>
       </div>`;
   }
 
