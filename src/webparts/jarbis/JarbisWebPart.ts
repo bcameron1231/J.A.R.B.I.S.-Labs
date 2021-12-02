@@ -1,7 +1,7 @@
 import { DisplayMode, Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneToggle
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { escape } from '@microsoft/sp-lodash-subset';
@@ -28,6 +28,7 @@ export interface IJarbisWebPartProps {
   foregroundIcon: string;
   backgroundIcon: string;
   list: string;
+  powersVisible: boolean;
 }
 
 export default class JarbisWebPart extends BaseClientSideWebPart<IJarbisWebPartProps> {
@@ -49,7 +50,7 @@ export default class JarbisWebPart extends BaseClientSideWebPart<IJarbisWebPartP
       oldbuttons[b].removeEventListener('click', this.onGenerateHero);
     }
 
-    if(this.displayMode == DisplayMode.Edit && typeof this._powers == "undefined") {
+    if (this.displayMode == DisplayMode.Edit && typeof this._powers == "undefined") {
       this.context.statusRenderer.displayLoadingIndicator(this.domElement, 'options');
       this.getPowers().catch((error) => console.error(error));
       return;
@@ -64,7 +65,9 @@ export default class JarbisWebPart extends BaseClientSideWebPart<IJarbisWebPartP
       </div>
       <div class="${styles.name}">
         The ${escape(this.properties.name)}
-      </div>
+      </div>`;
+
+    const powers = `
       <div class="${styles.powers}">
         (${escape(this.properties.primaryPower)} + ${escape(this.properties.secondaryPower)})
       </div>`;
@@ -74,6 +77,7 @@ export default class JarbisWebPart extends BaseClientSideWebPart<IJarbisWebPartP
     this.domElement.innerHTML = `
       <div class="${styles.jarbis}">
         ${hero}
+        ${this.properties.powersVisible ? powers : ""}
         ${this.displayMode == DisplayMode.Edit ? generateButton : ""}
       </div>`;
 
@@ -83,8 +87,8 @@ export default class JarbisWebPart extends BaseClientSideWebPart<IJarbisWebPartP
     }
   }
 
-  private getPowers = async(): Promise<void> => {
-    this._powers = await sp.web.lists.getByTitle(this.properties.list).items.select('Title','Icon','Colors','Prefix','Main').usingCaching().get();
+  private getPowers = async (): Promise<void> => {
+    this._powers = await sp.web.lists.getByTitle(this.properties.list).items.select('Title', 'Icon', 'Colors', 'Prefix', 'Main').usingCaching().get();
     this.render();
   }
 
@@ -93,23 +97,23 @@ export default class JarbisWebPart extends BaseClientSideWebPart<IJarbisWebPartP
     const power2: IPowerItem = this.getRandomItem(this._powers, power1);
     this.properties.primaryPower = power1.Title;
     this.properties.secondaryPower = power2.Title;
-    
+
     this.properties.backgroundColor = this.getRandomItem([...power1.Colors, ...power2.Colors]);
     this.properties.foregroundColor = this.getRandomItem([...power1.Colors, ...power2.Colors], this.properties.backgroundColor);
-    
-    this.properties.backgroundIcon = this.getRandomItem(['StarburstSolid','CircleShapeSolid','HeartFill','SquareShapeSolid','ShieldSolid']);
+
+    this.properties.backgroundIcon = this.getRandomItem(['StarburstSolid', 'CircleShapeSolid', 'HeartFill', 'SquareShapeSolid', 'ShieldSolid']);
     this.properties.foregroundIcon = this.getRandomItem([...power1.Icon, ...power2.Icon], this.properties.backgroundIcon);
-    
-    const prefix = this.getRandomItem([...power1.Prefix,...power2.Prefix]);
+
+    const prefix = this.getRandomItem([...power1.Prefix, ...power2.Prefix]);
     const main = this.getRandomItem([...power1.Main, ...power2.Main], prefix);
     this.properties.name = prefix + ' ' + main;
-    
+
     this.render();
   }
 
-  private getRandomItem = (items:any[], exclusion?:any): any => {
+  private getRandomItem = (items: any[], exclusion?: any): any => {
     const choices = items.filter((value) => value !== exclusion);
-    if(choices.length) {
+    if (choices.length) {
       return choices[Math.floor(Math.random() * choices.length)];
     }
     return "";
@@ -130,18 +134,13 @@ export default class JarbisWebPart extends BaseClientSideWebPart<IJarbisWebPartP
     return {
       pages: [
         {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
           groups: [
             {
-              groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('foregroundIcon', {
-                  label: strings.DescriptionFieldLabel
-                }),
-                PropertyPaneTextField('primaryPower', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneToggle('powersVisible', {
+                  label: "Powers",
+                  onText: "Visible",
+                  offText: "Hidden"
                 })
               ]
             }
