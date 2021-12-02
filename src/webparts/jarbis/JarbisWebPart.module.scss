@@ -7,7 +7,20 @@
   align-items: center;
 
   .logo {
-    color: inherit;
+    position: relative;
+    
+    .background {
+      font-size: 96px;
+      -webkit-text-stroke: $ms-color-neutralPrimary 1.4px;
+    }
+    
+    .foreground {
+      font-size: 48px;
+      -webkit-text-stroke: $ms-color-neutralPrimary 1.4px;
+      position: absolute;
+      top: 24px;
+      left: 24px;
+    }
   }
   
   .name {
