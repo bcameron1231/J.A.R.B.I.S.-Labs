@@ -27,6 +27,11 @@ export interface IJarbisWebPartProps {
 export default class JarbisWebPart extends BaseClientSideWebPart<IJarbisWebPartProps> {
 
   public render(): void {
+    const oldbuttons = this.domElement.getElementsByClassName(styles.generateButton);
+    for (let b = 0; b < oldbuttons.length; b++) {
+      oldbuttons[b].removeEventListener('click', this.onGenerateHero);
+    }
+
     const hero = `
       <div class="${styles.logo}">
         <i class="${css(styles.background, getIconClassName(escape(this.properties.backgroundIcon)))}" style="color:${escape(this.properties.backgroundColor)};"></i>
@@ -38,18 +43,34 @@ export default class JarbisWebPart extends BaseClientSideWebPart<IJarbisWebPartP
       <div class="${styles.powers}">
         (${escape(this.properties.primaryPower)} + ${escape(this.properties.secondaryPower)})
       </div>`;
-    
-    const generateButton = `<button>Generate</button>`;
-    
+
+    const generateButton = `<button class="${styles.generateButton}">Generate</button>`;
+
     this.domElement.innerHTML = `
       <div class="${styles.jarbis}">
         ${hero}
         ${this.displayMode == DisplayMode.Edit ? generateButton : ""}
       </div>`;
+
+    const buttons = this.domElement.getElementsByClassName(styles.generateButton);
+    for (let b = 0; b < buttons.length; b++) {
+      buttons[b].addEventListener('click', this.onGenerateHero);
+    }
+  }
+
+  public onGenerateHero = (event: MouseEvent): void => {
+    console.log('Generating!' + this.properties.primaryPower);
   }
 
   protected get dataVersion(): Version {
     return Version.parse('1.0');
+  }
+
+  protected onDispose(): void {
+    const oldbuttons = this.domElement.getElementsByClassName(styles.generateButton);
+    for (let b = 0; b < oldbuttons.length; b++) {
+      oldbuttons[b].removeEventListener('click', this.onGenerateHero);
+    }
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
