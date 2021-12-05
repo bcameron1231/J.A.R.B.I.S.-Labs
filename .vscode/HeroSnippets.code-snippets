@@ -1,0 +1,640 @@
+{
+	//These snippets are provided as part of the SPFx Heroes Workshop presented by Chris Kent and David Warner
+	// They are intended to provide quick shortcuts to follow along in the demo without having to type everything
+	// We still recommend typing everything if you can since that will make it easier to remember, but... we get it.
+	
+	//Snippets can be inserted by typing the prefix (ie hs2a) and hitting tab (default vscode configuration)
+	// Alternatively, you can use F1 and choose Insert Snippet and choose the correct snippet from the choices
+	// This is often required for inserting snippets in the middle of a string
+
+	//To use, place this file in the .vscode folder of your project
+
+
+	//Section 1 - SPFx/Project Introduction
+	// No snippets for this section (not doing much with code)
+
+	//Section 2 - Introduction to SCSS in SPFx
+	"SPFx Heroes: 2a - Sample Styles": {
+		"scope": "scss",
+		"prefix": "hs2a",
+		"description": "SPFx Heroes: 2a - Sample Styles",
+		"body": [
+			"color: \\$ms-color-themePrimary;",
+			"",
+			"&:hover {",
+			"  background-color: orange;",
+			"}"
+		]
+	},
+	"SPFx Heroes: 2b - Empty Divs": {
+		"prefix": "hs2b",
+		"scope": "typescript",
+		"body": [
+			"<div class=\"\">",
+			"  Logo",
+			"</div>",
+			"<div class=\"\">",
+			"  The Something Hero",
+			"</div>",
+			"<div class=\"\">",
+			"  (Primary + Secondary)",
+			"</div>"
+		],
+		"description": "SPFx Heroes: 2b - Empty Divs"
+	},
+	"SPFx Heroes: 2c - Empty Classes": {
+		"prefix": "hs2c",
+		"scope": "scss",
+		"body": [
+			".logo {",
+			"",
+			"}",
+			"",
+			".name {",
+			"",
+			"}",
+			"",
+			".powers {",
+			"  ",
+			"}"
+		],
+		"description": "SPFx Heroes: 2c - Empty Classes"
+	},
+	"SPFx Heroes: 2d - Empty Classes with placeholder styles": {
+		"prefix": "hs2d",
+		"scope": "scss",
+		"body": [
+			".logo {",
+			"  color: inherit;",
+			"}",
+			"",
+			".name {",
+			"  color: inherit;",
+			"}",
+			"",
+			".powers {",
+			"  color: inherit;",
+			"}"
+		],
+		"description": "SPFx Heroes: 2d - Empty Classes with placeholder styles"
+	},
+	"SPFx Heroes: 2e - Divs with Classes": {
+		"prefix": "hs2e",
+		"scope": "typescript",
+		"body": [
+			"<div class=\"${styles.logo}\">",
+			"  Logo",
+			"</div>",
+			"<div class=\"${styles.name}\">",
+			"  The Something Hero",
+			"</div>",
+			"<div class=\"${styles.powers}\">",
+			"  (Primary + Secondary)",
+			"</div>"
+		],
+		"description": "SPFx Heroes: 2e - Divs with Classes"
+	},
+	"SPFx Heroes: 2f - Root Styles": {
+		"prefix": "hs2f",
+		"scope": "scss",
+		"body": [
+			"color: \\$ms-color-neutralPrimary;",
+			"display: flex;",
+			"flex-direction: column;",
+			"align-items: center;"
+		],
+		"description": "SPFx Heroes: 2f - Root Styles"
+	},
+	"SPFx Heroes: 2g - Name Styles": {
+		"prefix": "hs2g",
+		"scope": "scss",
+		"body": [
+			"font-weight: bold;",
+			"font-size: 18px;"
+		],
+		"description": "SPFx Heroes: 2g - Name Styles"
+	},
+	"SPFx Heroes: 2h - Powers Styles": {
+		"prefix": "hs2h",
+		"scope": "scss",
+		"body": [
+			"color: $ms-color-neutralSecondary;",
+			"font-size: 14px;"
+		],
+		"description": "SPFx Heroes: 2h - Powers Styles"
+	},
+
+	//Section 3 - Working with Icons
+	"SPFx Heroes: 3a - Icon Utilities Imports": {
+		"prefix": "hs3a",
+		"scope": "typescript",
+		"body": [
+			"import { initializeIcons } from '@uifabric/icons';",
+			"import { getIconClassName } from '@uifabric/styling';",
+			"",
+			"initializeIcons();"
+		],
+		"description": "SPFx Heroes: 3a - Icon Utilities Imports"
+	},
+	"SPFx Heroes: 3b - Initial Icon Display": {
+		"prefix": "hs3b",
+		"scope": "typescript",
+		"body": [
+			"<i class=\"${getIconClassName('ShieldSolid')}\"></i>",
+			"<i class=\"${getIconClassName('FangBody')}\"></i>"
+		],
+		"description": "SPFx Heroes: 3b - Initial Icon Display"
+	},
+	"SPFx Heroes: 3c - Logo Sub Classes with Initial Styles": {
+		"prefix": "hs3c",
+		"scope": "scss",
+		"body": [
+			".background {",
+			"  font-size: 96px;",
+			"}",
+			"",
+			".foreground {",
+			"  font-size: 48px;",
+			"}"
+		],
+		"description": "SPFx Heroes: 3c - Logo Sub Classes with Initial Styles"
+	},
+	"SPFx Heroes: 3d - CSS Utility Import": {
+		"prefix": "hs3d",
+		"scope": "typescript",
+		"body": [
+			"import { css } from '@uifabric/utilities';"
+		],
+		"description": "SPFx Heroes: 3d - CSS Utility Import"
+	},
+	"SPFx Heroes: 3e - CSS Utility for Logo Child Divs": {
+		"prefix": "hs3e",
+		"scope": "typescript",
+		"body": [
+			"<i class=\"${css(styles.background, getIconClassName('ShieldSolid'))}\"></i>",
+			"<i class=\"${css(styles.foreground, getIconClassName('FavoriteStarFill'))}\"></i>"
+		],
+		"description": "SPFx Heroes: 3e - CSS Utility for Logo Child Divs"
+	},
+	"SPFx Heroes: 3f - Logo Child Divs with Inline Styles for Color": {
+		"prefix": "hs3f",
+		"scope": "typescript",
+		"body": [
+			"<i class=\"${css(styles.background, getIconClassName('ShieldSolid'))}\" style=\"color:skyblue;\"></i>",
+			"<i class=\"${css(styles.foreground, getIconClassName('FavoriteStarFill'))}\" style=\"color:orange;\"></i>"
+		],
+		"description": "SPFx Heroes: 3f - Logo Child Divs with Inline Styles for Color"
+	},
+	"SPFx Heroes: 3g - Logo Styles": {
+		"prefix": "hs3g",
+		"scope": "scss",
+		"body": [
+			"position: relative;",
+			"",
+			".background {",
+			"  font-size: 96px;",
+			"  -webkit-text-stroke: \\$ms-color-neutralPrimary 1.4px;",
+			"}",
+			"",
+			".foreground {",
+			"  font-size: 48px;",
+			"  -webkit-text-stroke: \\$ms-color-neutralPrimary 1.4px;",
+			"  position: absolute;",
+			"  top: 24px;",
+			"  left: 24px;",
+			"}"
+		],
+		"description": "SPFx Heroes: 3g - Logo Styles"
+	},
+
+	//Section 4 - Property Integration and Utilizing DisplayMode
+	"SPFx Heroes: 4a - Value Props": {
+		"prefix": "hs4a",
+		"scope": "typescript",
+		"body": [
+			"name: string;",
+			"primaryPower: string;",
+			"secondaryPower: string;",
+			"foregroundColor: string;",
+			"backgroundColor: string;",
+			"foregroundIcon: string;",
+			"backgroundIcon: string;"
+		],
+		"description": "SPFx Heroes: 4a - Value Props"
+	},
+	"SPFx Heroes: 4b - Value Prop Defaults": {
+		"prefix": "hs4b",
+		"scope": "json",
+		"body": [
+			"\"name\": \"Lab Rat\",",
+			"\"primaryPower\": \"Science\",",
+			"\"secondaryPower\": \"Experiments\",",
+			"\"foregroundColor\": \"orange\",",
+			"\"backgroundColor\": \"skyblue\",",
+			"\"foregroundIcon\": \"TestBeakerSolid\",",
+			"\"backgroundIcon\": \"StarburstSolid\""
+		],
+		"description": "SPFx Heroes: 4b - Value Prop Defaults"
+	},
+	"SPFx Heroes: 4c - Dynamic Values": {
+		"prefix": "hs4c",
+		"scope": "typescript",
+		"body": [
+			"<div class=\"${styles.logo}\">",
+			"  <i class=\"${css(styles.background, getIconClassName(this.properties.backgroundIcon))}\" style=\"color:${this.properties.backgroundColor};\"></i>",
+			"  <i class=\"${css(styles.foreground, getIconClassName(this.properties.foregroundIcon))}\" style=\"color:${this.properties.foregroundColor};\"></i>",
+			"</div>",
+			"<div class=\"${styles.name}\">",
+			"  The ${this.properties.name}",
+			"</div>",
+			"<div class=\"${styles.powers}\">",
+			"  (${this.properties.primaryPower} + ${this.properties.secondaryPower})",
+			"</div>"
+		],
+		"description": "SPFx Heroes: 4c - Dynamic Values"
+	},
+	"SPFx Heroes: 4d - Escaped Dynamic Values": {
+		"prefix": "hs4d",
+		"scope": "typescript",
+		"body": [
+			"<div class=\"${styles.logo}\">",
+			"  <i class=\"${css(styles.background, getIconClassName(escape(this.properties.backgroundIcon)))}\" style=\"color:${escape(this.properties.backgroundColor)};\"></i>",
+			"  <i class=\"${css(styles.foreground, getIconClassName(escape(this.properties.foregroundIcon)))}\" style=\"color:${escape(this.properties.foregroundColor)};\"></i>",
+			"</div>",
+			"<div class=\"${styles.name}\">",
+			"  The ${escape(this.properties.name)}",
+			"</div>",
+			"<div class=\"${styles.powers}\">",
+			"  (${escape(this.properties.primaryPower)} + ${escape(this.properties.secondaryPower)})",
+			"</div>"
+		],
+		"description": "SPFx Heroes: 4d - Escaped Dynamic Values"
+	},
+	"SPFx Heroes: 4e - DisplayMode Generate Button": {
+		"prefix": "hs4e",
+		"scope": "typescript",
+		"body": [
+			"const hero = `",
+			"  <div class=\"${styles.logo}\">",
+			"    <i class=\"${css(styles.background, getIconClassName(escape(this.properties.backgroundIcon)))}\" style=\"color:${escape(this.properties.backgroundColor)};\"></i>",
+			"    <i class=\"${css(styles.foreground, getIconClassName(escape(this.properties.foregroundIcon)))}\" style=\"color:${escape(this.properties.foregroundColor)};\"></i>",
+			"  </div>",
+			"  <div class=\"${styles.name}\">",
+			"    The ${escape(this.properties.name)}",
+			"  </div>",
+			"  <div class=\"${styles.powers}\">",
+			"    (${escape(this.properties.primaryPower)} + ${escape(this.properties.secondaryPower)})",
+			"  </div>`;",
+			"",
+			"const generateButton = `<button>Generate</button>`;",
+			"",
+			"this.domElement.innerHTML = `",
+			"  <div class=\"${styles.jarbis}\">",
+			"    \\${hero}",
+			"    ${this.displayMode == DisplayMode.Edit ? generateButton : \"\"}",
+			"  </div>`;"
+		],
+		"description": "SPFx Heroes: 4e - DisplayMode Generate Button"
+	},
+
+	//Section 5 - Event Handling
+	"SPFx Heroes: 5a - Generate Button Styles": {
+		"prefix": "hs5a",
+		"scope": "scss",
+		"body": [
+			".generateButton {",
+			"  margin: 12px;",
+			"  background-color: \\$ms-color-themePrimary;",
+			"  color: \\$ms-color-white;",
+			"  border: none;",
+			"  border-radius: 2px;",
+			"  height: 32px;",
+			"  font-size: 14px;",
+			"  padding: 0 12px;",
+			"  font-weight: 600;",
+			"",
+			"  &:hover {",
+			"    background-color: \\$ms-color-themeDarkAlt;",
+			"  }",
+			"  &:active {",
+			"    background-color: \\$ms-color-themeDark;",
+			"  }",
+			"}"
+		],
+		"description": "SPFx Heroes: 5a - Generate Button Styles"
+	},
+	"SPFx Heroes: 5b - Generate Button with Class": {
+		"prefix": "hs5b",
+		"scope": "typescript",
+		"body": [
+			"const generateButton = `<button class=\"${styles.generateButton}\">Generate</button>`;"
+		],
+		"description": "SPFx Heroes: 5b - Generate Button with Class"
+	},
+	"SPFx Heroes: 5c - onGenerateHero Initial Method": {
+		"prefix": "hs5c",
+		"scope": "typescript",
+		"body": [
+			"public onGenerateHero(event: MouseEvent): void {",
+			"  console.log('Generating!');",
+			"}"
+		],
+		"description": "SPFx Heroes: 5c - onGenerateHero Initial Method"
+	},
+	"SPFx Heroes: 5d - Add Event Listener": {
+		"prefix": "hs5d",
+		"scope": "typescript",
+		"body": [
+			"const buttons = this.domElement.getElementsByClassName(styles.generateButton);",
+			"for (let b = 0; b < buttons.length; b++) {",
+			"  buttons[b].addEventListener('click', this.onGenerateHero);",
+			"}"
+		],
+		"description": "SPFx Heroes: 5d - Add Event Listener"
+	},
+	"SPFx Heroes: 5e - Remove Event Listener": {
+		"prefix": "hs5e",
+		"scope": "typescript",
+		"body": [
+			"const oldbuttons = this.domElement.getElementsByClassName(styles.generateButton);",
+			"for (let b = 0; b < oldbuttons.length; b++) {",
+			"  oldbuttons[b].removeEventListener('click', this.onGenerateHero);",
+			"}"
+		],
+		"description": "SPFx Heroes: 5e - Remove Event Listener"
+	},
+	"SPFx Heroes: 5f - onDispose": {
+		"prefix": "hs5f",
+		"scope": "typescript",
+		"body": [
+			"protected onDispose(): void {",
+			"  const oldbuttons = this.domElement.getElementsByClassName(styles.generateButton);",
+			"  for (let b = 0; b < oldbuttons.length; b++) {",
+			"    oldbuttons[b].removeEventListener('click', this.onGenerateHero);",
+			"  }",
+			"}"
+		],
+		"description": "SPFx Heroes: 5f - onDispose"
+	},
+	"SPFx Heroes: 5g - Arrow Function onGenerateHero": {
+		"prefix": "hs5g",
+		"scope": "typescript",
+		"body": [
+			"public onGenerateHero = (event: MouseEvent): void => {",
+			"  console.log('Generating!' + this.properties.primaryPower);",
+			"}"
+		],
+		"description": "SPFx Heroes: 5g - Arrow Function onGenerateHero"
+	},
+	//Section 6 - Getting items from a List using PnPjs
+	"SPFx Heroes: 6a - IPowerItem": {
+		"prefix": "hs6a",
+		"scope": "typescript",
+		"body": [
+			"export interface IPowerItem {",
+			"    Title: string;",
+			"    Colors: string[];",
+			"    Icon: string[];",
+			"    Main: string[];",
+			"    Prefix: string[];",
+			"}"
+		],
+		"description": "SPFx Heroes: 6a - IPowerItem"
+	},
+	"SPFx Heroes: 6b - Import IPowerItem": {
+		"prefix": "hs6b",
+		"scope": "typescript",
+		"body": [
+			"import { IPowerItem } from './IPowerItem';"
+		],
+		"description": "SPFx Heroes: 6b - Import IPowerItem"
+	},
+	"SPFx Heroes: 6c - Private Member _powers": {
+		"prefix": "hs6c",
+		"scope": "typescript",
+		"body": [
+			"private _powers: IPowerItem[];"
+		],
+		"description": "SPFx Heroes: 6c - Private Member _powers"
+	},
+	"SPFx Heroes: 6d - statusRenderer": {
+		"prefix": "hs6d",
+		"scope": "typescript",
+		"body": [
+			"if(this.displayMode == DisplayMode.Edit && typeof this._powers == \"undefined\") {",
+			"  this.context.statusRenderer.displayLoadingIndicator(this.domElement, 'options');",
+			"  return;",
+			"} else {",
+			"  this.context.statusRenderer.clearLoadingIndicator(this.domElement);",
+			"}"
+		],
+		"description": "SPFx Heroes: 6d - statusRenderer"
+	},
+	"SPFx Heroes: 6e - list Property": {
+		"prefix": "hs6e",
+		"scope": "typescript",
+		"body": [
+			"list: string;"
+		],
+		"description": "SPFx Heroes: 6e - list property"
+	},
+	"SPFx Heroes: 6f - list Property Default": {
+		"prefix": "hs6f",
+		"scope": "json",
+		"body": [
+			",",
+			"\"list\": \"Powers\""
+		],
+		"description": "SPFx Heroes: 6f - list property default"
+	},
+	"SPFx Heroes: 6g - PnPjs Imports": {
+		"prefix": "hs6g",
+		"scope": "typescript",
+		"body": [
+			"import { sp } from '@pnp/sp';",
+			"import '@pnp/sp/webs';",
+			"import '@pnp/sp/lists';",
+			"import '@pnp/sp/items';"
+		],
+		"description": "SPFx Heroes: 6g - PnPjs Imports"
+	},
+	"SPFx Heroes: 6h - onInit with PnPjs Setup": {
+		"prefix": "hs6h",
+		"scope": "typescript",
+		"body": [
+			"protected onInit(): Promise<void> {",
+			"  return super.onInit().then(() => {",
+			"    sp.setup({",
+			"      spfxContext: this.context,",
+			"      defaultCachingTimeoutSeconds: 300,",
+			"    });",
+			"  });",
+			"}"
+		],
+		"description": "SPFx Heroes: 6h - onInit with PnPjs Setup"
+	},
+	"SPFx Heroes: 6i - getPowers Method": {
+		"prefix": "hs6i",
+		"scope": "typescript",
+		"body": [
+			"private getPowers = async(): Promise<void> => {",
+			"  this._powers = await sp.web.lists.getByTitle(this.properties.list).items.select('Title','Icon','Colors','Prefix','Main').usingCaching().get();",
+			"}"
+		],
+		"description": "SPFx Heroes: 6i - getPowers Method"
+	},
+	"SPFx Heroes: 6j - getPowers Call": {
+		"prefix": "hs6j",
+		"scope": "typescript",
+		"body": [
+			"this.getPowers().catch((error) => console.error(error));"
+		],
+		"description": "SPFx Heroes: 6j - getPowers Call"
+	},
+	"SPFx Heroes: 6k - Render After getPowers": {
+		"prefix": "hs6k",
+		"scope": "typescript",
+		"body": [
+			"this.render();"
+		],
+		"description": "SPFx Heroes: 6k - Render after getPowers"
+	},
+	
+	//Section 7 - Generating a Hero
+	"SPFx Heroes: 7a - getRandomItem": {
+		"prefix": "hs7a",
+		"scope": "typescript",
+		"body": [
+			"private getRandomItem = (items:any[], exclusion?:any): any => {",
+			"  const choices = items.filter((value) => value !== exclusion);",
+			"  if(choices.length) {",
+			"    return choices[Math.floor(Math.random() * choices.length)];",
+			"  }",
+			"  return \"\";",
+			"}"
+		],
+		"description": "SPFx Heroes: 7a - getRandomItem"
+	},
+	"SPFx Heroes: 7b - onGenerateHero Final": {
+		"prefix": "hs7b",
+		"scope": "typescript",
+		"body": [
+			"const power1: IPowerItem = this.getRandomItem(this._powers);",
+			"const power2: IPowerItem = this.getRandomItem(this._powers, power1);",
+			"this.properties.primaryPower = power1.Title;",
+			"this.properties.secondaryPower = power2.Title;",
+			"",
+			"this.properties.backgroundColor = this.getRandomItem([...power1.Colors, ...power2.Colors]);",
+			"this.properties.foregroundColor = this.getRandomItem([...power1.Colors, ...power2.Colors], this.properties.backgroundColor);",
+			"",
+			"this.properties.backgroundIcon = this.getRandomItem(['StarburstSolid','CircleShapeSolid','HeartFill','SquareShapeSolid','ShieldSolid']);",
+			"this.properties.foregroundIcon = this.getRandomItem([...power1.Icon, ...power2.Icon], this.properties.backgroundIcon);",
+			"",
+			"const prefix = this.getRandomItem([...power1.Prefix,...power2.Prefix]);",
+			"const main = this.getRandomItem([...power1.Main, ...power2.Main], prefix);",
+			"this.properties.name = prefix + ' ' + main;",
+			"",
+			"this.render();"
+		],
+		"description": "SPFx Heroes: 7b - onGenerateHero Final"
+	},
+	//Section 8 - 
+	"SPFx Heroes: 8a - powersVisible Property": {
+		"prefix": "hs8a",
+		"scope": "typescript",
+		"body": [
+			"powersVisible: boolean;"
+		],
+		"description": "SPFx Heroes: 8a - powersVisible Property"
+	},
+	"SPFx Heroes: 8b - powersVisible Property Default": {
+		"prefix": "hs8b",
+		"scope": "json",
+		"body": [
+			",",
+			"\"powersVisible\": true"
+		],
+		"description": "SPFx Heroes: 8b - powersVisible Property Default"
+	},
+	"SPFx Heroes: 8c - render Final": {
+		"prefix": "hs8c",
+		"scope": "typescript",
+		"body": [
+			"const oldbuttons = this.domElement.getElementsByClassName(styles.generateButton);",
+			"for (let b = 0; b < oldbuttons.length; b++) {",
+			"  oldbuttons[b].removeEventListener('click', this.onGenerateHero);",
+			"}",
+			"",
+			"if (this.displayMode == DisplayMode.Edit && typeof this._powers == \"undefined\") {",
+			"  this.context.statusRenderer.displayLoadingIndicator(this.domElement, 'options');",
+			"  this.getPowers().catch((error) => console.error(error));",
+			"  return;",
+			"} else {",
+			"  this.context.statusRenderer.clearLoadingIndicator(this.domElement);",
+			"}",
+			"",
+			"const hero = `",
+			"  <div class=\"${styles.logo}\">",
+			"    <i class=\"${css(styles.background, getIconClassName(escape(this.properties.backgroundIcon)))}\" style=\"color:${escape(this.properties.backgroundColor)};\"></i>",
+			"    <i class=\"${css(styles.foreground, getIconClassName(escape(this.properties.foregroundIcon)))}\" style=\"color:${escape(this.properties.foregroundColor)};\"></i>",
+			"  </div>",
+			"  <div class=\"${styles.name}\">",
+			"    The ${escape(this.properties.name)}",
+			"  </div>`;",
+			"",
+			"const powers = `",
+			"  <div class=\"${styles.powers}\">",
+			"    (${escape(this.properties.primaryPower)} + ${escape(this.properties.secondaryPower)})",
+			"  </div>`;",
+			"",
+			"const generateButton = `<button class=\"${styles.generateButton}\">Generate</button>`;",
+			"",
+			"this.domElement.innerHTML = `",
+			"  <div class=\"${styles.jarbis}\">",
+			"    \\${hero}",
+			"    ${this.properties.powersVisible ? powers : \"\"}",
+			"    ${this.displayMode == DisplayMode.Edit ? generateButton : \"\"}",
+			"  </div>`;",
+			"",
+			"const buttons = this.domElement.getElementsByClassName(styles.generateButton);",
+			"for (let b = 0; b < buttons.length; b++) {",
+			"  buttons[b].addEventListener('click', this.onGenerateHero);",
+			"}"
+		],
+		"description": "SPFx Heroes: 8c - render Final"
+	},
+	"SPFx Heroes: 8d - getPropertyPaneConfiguration Final": {
+		"prefix": "hs8d",
+		"scope": "typescript",
+		"body": [
+			"return {",
+			"  pages: [",
+			"    {",
+			"      groups: [",
+			"        {",
+			"          groupFields: [",
+			"            PropertyPaneToggle('powersVisible',{",
+			"              label: \"Powers\",",
+			"              onText: \"Visible\",",
+			"              offText: \"Hidden\"",
+			"            })",
+			"          ]",
+			"        }",
+			"      ]",
+			"    }",
+			"  ]",
+			"};"
+		],
+		"description": "SPFx Heroes: 8d - getPropertyPaneConfiguration Final"
+	},
+	"SPFx Heroes: 8e - disableReactivePropertyChanges": {
+		"prefix": "hs8e",
+		"scope": "typescript",
+		"body": [
+			"protected get disableReactivePropertyChanges(): boolean {",
+			"  return true;",
+			"}"
+		],
+		"description": "SPFx Heroes: 8e - disableReactivePropertyChanges"
+	}
+}
